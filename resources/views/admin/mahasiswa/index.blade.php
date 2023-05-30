@@ -7,7 +7,7 @@
             <div class="card-header">
                 <h5 class="card-title">Data Mahasiswa</h5>
                 <div class="float-end">
-                    <a href="{{ url('mahasiswa/tambah-data') }}" class="btn btn-primary">Tambah Data</a>
+                    <a href="{{ url('admin/mahasiswa/tambah-data') }}" class="btn btn-primary">Tambah Data</a>
                 </div>
             </div>
             <div class="card-body">
