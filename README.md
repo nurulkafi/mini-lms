@@ -10,7 +10,7 @@
 <li>Ubah nama file <strong>.env.example</strong> menjadi <strong>.env</strong></li>
 <li>Selanjutnya buka lagi command line  dan jalankan : <code>php artisan key:generate</code></li>
 <li>Selanjutnya buka file .env dan sesuaikan nama database misalkan : <code>DB_DATABASE=mini-lms</code></li>
-<li>Selanjutnya migrate dengan command : <code>php artisan key:generate</code></li>
+<li>Selanjutnya migrate dengan command : <code>php artisan migrate</code></li>
 </ul>
 <h2 id="run-project">Run Project</h2>
 <pre><code>php artisan serve
