@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\JadwalPerkuliahan;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\MataKuliahController;
 use App\Http\Controllers\Admin\MateriPembelajaranController;
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,9 @@ Route::get('admin/materi-pembelajaran/tambah-data', [MateriPembelajaranControlle
 Route::get('admin/jadwal-perkuliahan', [JadwalPerkuliahan::class, 'index']);
 Route::get('admin/jadwal-perkuliahan/tambah-data', [JadwalPerkuliahan::class, 'create']);
 
+
+Route::get('mata-kuliah', [FrontController::class, 'index']);
+Route::get('mata-kuliah/detail', [FrontController::class, 'detail']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
