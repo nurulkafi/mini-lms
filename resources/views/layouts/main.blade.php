@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mazer</title>
+    <title>{{ $title ?? "Universitas Jenderal Achmad Yani" }}</title>
     @include('layouts.style')
 </head>
 
 <body>
     <script src="{{ asset('assets/js/initTheme.js') }}"></script>
     <div id="app">
+        @include('sweetalert::alert')
         @include('layouts.sidebar')
         <div id="main" class="layout-navbar navbar-fixed">
             @include('layouts.header')

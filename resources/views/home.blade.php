@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-@include('layouts.head')
-<body>
-    <script src="{{ asset('assets/js/initTheme.js') }}"></script>
-    <div id="app">
-        @include('layouts.sidebar')
-        <div id="main">
-            <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
-            </header>
-            <div class="page-heading">
-                <h3>LMS</h3>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
+
+                <div class="card-body">
+                    You are logged in!
+                </div>
             </div>
-            <div class="page-content">
-                @yield('content')
-            </div>
-            @include('layouts.footer')
         </div>
     </div>
-    <script src="{{ asset('assets/js/dark.js') }}"></script>
-    <script src="{{ asset('assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-</body>
-</html>
+</div>
+@endsection

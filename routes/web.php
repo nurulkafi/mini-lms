@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\MataKuliahController;
 use App\Http\Controllers\Admin\MateriPembelajaranController;
 use App\Http\Controllers\FrontController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +20,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        if (Auth::user()->hasRole('mahasiswa')) {
+            return redirect('/mata-kuliah');
+        } elseif (Auth::user()->hasRole('admin')) {
+            return redirect('/admin/mahasiswa');
+        }
+    } else {
+        return redirect('/login');
+    }
 });
 Route::get('admin/mahasiswa',[MahasiswaController::class,'index']);
 Route::get('admin/mahasiswa/tambah-data', [MahasiswaController::class, 'create']);
+Route::post('admin/mahasiswa/proses-tambah-data', [MahasiswaController::class, 'store']);
+Route::get('admin/mahasiswa/edit-data/{id}', [MahasiswaController::class, 'edit']);
+Route::delete('admin/mahasiswa/hapus-data/{id}', [MahasiswaController::class, 'destroy']);
+Route::post('admin/mahasiswa/proses-edit-data/{id}', [MahasiswaController::class, 'update']);
 
 Route::get('admin/mata-kuliah', [MataKuliahController::class, 'index']);
 Route::get('admin/mata-kuliah/tambah-data', [MataKuliahController::class, 'create']);

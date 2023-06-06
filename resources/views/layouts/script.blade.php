@@ -16,3 +16,6 @@
 <script src="{{ asset('assets/vendor/filepond/filepond.js')}}"></script>
 <script src="{{ asset('assets/vendor/toastify-js/src/toastify.js')}}"></script>
 <script src="{{ asset('assets/js/filepond.js')}}"></script>
+
+<script src="{{ asset('assets/vendor/parsleyjs/parsley.min.js') }}"></script>
+<script src="{{ asset('assets/js/parsley.js') }}"></script>
