@@ -22,16 +22,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
+                            {{-- <td>1</td>
                                 <td>Bahasa Inggris</td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                         data-bs-target="#formMataKuliahModal">Edit</button>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#ModalHapus">Hapus</button>
-                                </td>
-                            </tr>
+                                </td> --}}
+                                @php
+                                    $no =1;
+                                @endphp
+                                @foreach ($data as $item)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $item->nama_mata_kuliah }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning btnEdit" data-bs-toggle="modal"
+                                            data-bs-target="#formMataKuliahModal" data-matkul="{{ $item->nama_mata_kuliah }}" data-id="{{ $item->id }}">Edit</button>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#ModalHapus">Hapus</button>
+                                    </td>
+                                </tr>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -48,30 +61,31 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="form form-horizontal">
+                    <form class="form form-horizontal form-matkul" method="post"
+                        action="{{ url('admin/mata-kuliah/proses-tambah-data') }}">
+                        @csrf
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="nama-mata-kuliah">Nama Mata Kuliah</label>
                                 </div>
                                 <div class="col-md-8 form-group">
-                                    <input type="text" id="nama-mata-kuliah" class="form-control" name="nama-mata-kuliah"
+                                    <input type="text" id="nama_mata_kuliah" class="form-control" name="nama_mata_kuliah"
                                         placeholder="Nama Mata Kuliah" />
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <!-- Modal Hapus-->
-    <div class="modal fade" id="ModalHapus" tabindex="-1" aria-labelledby="ModalHapusLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="ModalHapus" tabindex="-1" aria-labelledby="ModalHapusLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-danger ">
@@ -88,4 +102,14 @@
             </div>
         </div>
     </div>
+    <script>
+        $(".btnEdit").on('click',function(){
+            // alert();
+            var id = $(this).attr("data-id");
+            var matkul = $(this).attr("data-matkul");
+            // alert(id);
+            $('#nama_mata_kuliah').val(matkul);
+            $(".form-matkul").attr('action','../admin/mata-kuliah/proses-update-data/'+id);
+        });
+    </script>
 @endsection

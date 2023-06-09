@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\JadwalPerkuliahan as ModelsJadwalPerkuliahan;
+use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 
 class JadwalPerkuliahan extends Controller
@@ -14,7 +16,9 @@ class JadwalPerkuliahan extends Controller
      */
     public function index()
     {
-        return view('admin.jadwal-perkuliahan.index');
+        $title = 'Jadwal Perkuliahan';
+        $data =  ModelsJadwalPerkuliahan::get();
+        return view('admin.jadwal-perkuliahan.index',compact('data','title'));
     }
 
     /**
@@ -24,7 +28,9 @@ class JadwalPerkuliahan extends Controller
      */
     public function create()
     {
-        return view('admin.jadwal-perkuliahan.form');
+        $title = 'Jadwal Perkuliahan';
+        $matkul = MataKuliah::get();
+        return view('admin.jadwal-perkuliahan.form',compact('title','matkul'));
     }
 
     /**

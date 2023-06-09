@@ -39,7 +39,10 @@ Route::post('admin/mahasiswa/proses-edit-data/{id}', [MahasiswaController::class
 
 Route::get('admin/mata-kuliah', [MataKuliahController::class, 'index']);
 Route::get('admin/mata-kuliah/tambah-data', [MataKuliahController::class, 'create']);
+Route::post('admin/mata-kuliah/proses-tambah-data', [MataKuliahController::class, 'store']);
+Route::post('admin/mata-kuliah/proses-update-data/{id}', [MataKuliahController::class, 'update']);
 
+//
 Route::get('admin/materi-pembelajaran', [MateriPembelajaranController::class, 'index']);
 Route::get('admin/materi-pembelajaran/tambah-data', [MateriPembelajaranController::class, 'create']);
 

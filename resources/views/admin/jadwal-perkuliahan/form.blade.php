@@ -18,19 +18,25 @@
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <select name="mata-kuliah" id="mata-kuliah" class="form-select">
-                                                <option value="">Bahasa Inggris</option>
-                                                <option value="">Bahasa Sunda</option>
+                                                {{-- <option value="">Bahasa Inggris</option>
+                                                <option value="">Bahasa Sunda</option> --}}
+                                                @foreach ($matkul as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama_mata_kuliah }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <label for="pertemuan">Hari Perkuliahan</label>
+                                            <label for="hari_perkuliahan">Hari Perkuliahan</label>
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <select name="pertemuan" id="pertemuan" class="form-select">
-                                                <option value="">Senin</option>
-                                                <option value="">Selesa</option>
+                                            <select name="hari_perkuliahan" id="hari_perkuliahan" class="form-select">
+                                                <option value="Senin">Senin</option>
+                                                <option value="Selesa">Selesa</option>
+                                                <option value="Rabu">Rabu</option>
+                                                <option value="Kamis">Kamis</option>
+                                                <option value="Jum'at">Jum'at</option>
                                             </select>
                                         </div>
                                     </div>

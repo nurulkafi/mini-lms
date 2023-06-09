@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Mahasiswa;
+use App\Models\MataKuliah;
 use Illuminate\Http\Request;
-
+use Alert;
 class MataKuliahController extends Controller
 {
     /**
@@ -15,7 +17,9 @@ class MataKuliahController extends Controller
     public function index()
     {
         //
-        return view('admin.mata-kuliah.index');
+        $title = "Mata Kuliah";
+        $data = MataKuliah::get();
+        return view('admin.mata-kuliah.index',compact('data','title'));
     }
 
     /**
@@ -36,7 +40,16 @@ class MataKuliahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $saved = MataKuliah::create([
+                'nama_mata_kuliah' => $request->nama_mata_kuliah,
+            ]);
+            Alert::success('Informasi', 'Tambah Data Berhasil');
+            return redirect('admin/mata-kuliah');
+        } catch (\Throwable $th) {
+            Alert::error('Informasi', 'Terjadi Kesalahan!');
+            return redirect('admin/mata-kuliah');
+        }
     }
 
     /**
@@ -71,6 +84,18 @@ class MataKuliahController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try {
+            $data = MataKuliah::findOrFail($id);
+            $data->update([
+                'nama_mata_kuliah' => $request->nama_mata_kuliah,
+            ]);
+            Alert::success('Informasi', 'Tambah Data Berhasil');
+            return redirect('admin/mata-kuliah');
+        } catch (\Throwable $th) {
+            Alert::error('Informasi', 'Terjadi Kesalahan!');
+            return redirect('admin/mata-kuliah');
+            // dd($th->getMessage());
+        }
     }
 
     /**
