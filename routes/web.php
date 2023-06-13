@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\JadwalPerkuliahan;
+use App\Http\Controllers\Admin\KuisController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\MataKuliahController;
 use App\Http\Controllers\Admin\MateriPembelajaranController;
@@ -45,10 +46,14 @@ Route::post('admin/mata-kuliah/proses-update-data/{id}', [MataKuliahController::
 //
 Route::get('admin/materi-pembelajaran', [MateriPembelajaranController::class, 'index']);
 Route::get('admin/materi-pembelajaran/tambah-data', [MateriPembelajaranController::class, 'create']);
+Route::post('admin/materi-pembelajaran/proses-tambah-data', [MateriPembelajaranController::class, 'store']);
 
 Route::get('admin/jadwal-perkuliahan', [JadwalPerkuliahan::class, 'index']);
 Route::get('admin/jadwal-perkuliahan/tambah-data', [JadwalPerkuliahan::class, 'create']);
 
+
+Route::get('admin/kuis/{id}', [KuisController::class, 'index']);
+Route::post('admin/kuis/proses-tambah-data/{id}', [KuisController::class, 'store']);
 
 Route::get('mata-kuliah', [FrontController::class, 'index']);
 Route::get('mata-kuliah/detail', [FrontController::class, 'detail']);

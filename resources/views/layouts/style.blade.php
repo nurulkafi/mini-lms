@@ -16,10 +16,11 @@
       rel="stylesheet"
       href="{{ asset('assets/vendor/filepond-plugin-image-preview/filepond-plugin-image-preview.css') }}"
     />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/choices.js/public/assets/styles/choices.css') }}">
     <link
       rel="stylesheet"
       href="{{ asset('assets/vendor/toastify-js/src/toastify.css') }}"
     />
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    

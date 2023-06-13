@@ -19,3 +19,5 @@
 
 <script src="{{ asset('assets/vendor/parsleyjs/parsley.min.js') }}"></script>
 <script src="{{ asset('assets/js/parsley.js') }}"></script>
+<script src="{{ asset('assets/vendor/choices.js/public/assets/scripts/choices.js') }}"></script>
+<script src="{{ asset('assets/js/form-element-select.js') }}"></script>

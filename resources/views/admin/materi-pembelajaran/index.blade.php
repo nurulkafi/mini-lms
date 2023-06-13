@@ -16,12 +16,15 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Mata Kuliah</th>
+                                <th>Pertemuan</th>
+                                <th>Mata Kuliah</th>
+                                <th>Jenis Materi</th>
+                                <th>Deskripsi</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {{-- <tr>
                                 <td>1</td>
                                 <td>Bahasa Inggris</td>
                                 <td>
@@ -30,7 +33,29 @@
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#ModalHapus">Hapus</button>
                                 </td>
-                            </tr>
+                            </tr> --}}
+                            @php
+                                $no = 1;
+                            @endphp
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>Pertemuan ke-{{ $item->pertemuan }}</td>
+                                    <td>{{ $item->matkul->nama_mata_kuliah }}</td>
+                                    <td>{{ $item->jenis_materi == 1 ? 'Kuis' : 'Materi' }}</td>
+                                    <td>{{ $item->deskripsi }}</td>
+                                    <td>
+                                        @if ($item->jenis_materi == 1)
+                                            <a href="{{ url('admin/kuis/' . $item->id) }}" class="btn btn-primary">Soal
+                                                Kuis</a>
+                                        @endif
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#formMataKuliahModal">Edit</button>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#ModalHapus">Hapus</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -69,8 +94,7 @@
         </div>
     </div>
     <!-- Modal Hapus-->
-    <div class="modal fade" id="ModalHapus" tabindex="-1" aria-labelledby="ModalHapusLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="ModalHapus" tabindex="-1" aria-labelledby="ModalHapusLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-danger ">

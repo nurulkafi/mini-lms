@@ -13,9 +13,9 @@
                             <img src="{{ asset('assets/jpg/1.jpg') }}" alt="Avatar" />
                         </div>
                         <div class="text">
-                            <h6 class="user-dropdown-name">John Ducky</h6>
+                            <h6 class="user-dropdown-name">{{ Str::upper(Auth::user()->name) }}</h6>
                             <p class="user-dropdown-status text-sm text-muted">
-                                Member
+                                Mahasiswa
                             </p>
                         </div>
                     </a>
@@ -34,7 +34,15 @@
 
                         </li>
                         <li>
-                            <a class="dropdown-item" href="auth-login.html">Logout</a>
+                            {{-- <a class="dropdown-item" href="auth-login.html">Logout</a> --}}
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i
+                                    class="icon-mid bi bi-box-arrow-left me-2"></i>
+                                Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </div>
