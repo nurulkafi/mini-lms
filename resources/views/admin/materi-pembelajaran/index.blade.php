@@ -46,13 +46,18 @@
                                     <td>{{ $item->deskripsi }}</td>
                                     <td>
                                         @if ($item->jenis_materi == 1)
-                                            <a href="{{ url('admin/kuis/' . $item->id) }}" class="btn btn-primary">Soal
+                                            <a href="{{ url('admin/kuis/' . $item->id) }}" class="btn btn-info">Soal
                                                 Kuis</a>
                                         @endif
-                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                            data-bs-target="#formMataKuliahModal">Edit</button>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#ModalHapus">Hapus</button>
+                                        {{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#formMataKuliahModal">Edit</button> --}}
+                                        <a href="{{ url('admin/materi-pembelajaran/edit/' . $item->id) }}" class="btn btn-warning">Edit</a>
+                                        <form method="POST" action="{{ url('admin/materi-pembelajaran/hapus-data/' . $item->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger show_confirm"
+                                                data-toggle="tooltip" title='Delete'>Hapus</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -111,4 +116,21 @@
             </div>
         </div>
     </div>
+        <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda Yakin Akan Menghapus Data?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
+    </script>
 @endsection

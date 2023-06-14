@@ -45,8 +45,14 @@ Route::post('admin/mata-kuliah/proses-update-data/{id}', [MataKuliahController::
 
 //
 Route::get('admin/materi-pembelajaran', [MateriPembelajaranController::class, 'index']);
+Route::get('admin/materi-pembelajaran/edit/{id}', [MateriPembelajaranController::class, 'edit']);
 Route::get('admin/materi-pembelajaran/tambah-data', [MateriPembelajaranController::class, 'create']);
+Route::delete('admin/hapus-file/{id}', [MateriPembelajaranController::class, 'deleteFile']);
 Route::post('admin/materi-pembelajaran/proses-tambah-data', [MateriPembelajaranController::class, 'store']);
+Route::post('admin/materi-pembelajaran/proses-update-data/{id}', [MateriPembelajaranController::class, 'update']);
+Route::delete('admin/materi-pembelajaran/hapus-data/{id}', [MateriPembelajaranController::class, 'destroy']);
+Route::get('admin/pertemuan/check/{id}', [MateriPembelajaranController::class, 'pertemuanCheck']);
+
 
 Route::get('admin/jadwal-perkuliahan', [JadwalPerkuliahan::class, 'index']);
 Route::get('admin/jadwal-perkuliahan/tambah-data', [JadwalPerkuliahan::class, 'create']);

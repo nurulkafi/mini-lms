@@ -8,6 +8,7 @@ use App\Models\MataKuliah;
 use App\Models\MateriPembelajaran;
 use Illuminate\Http\Request;
 use Alert;
+
 class MateriPembelajaranController extends Controller
 {
     /**
@@ -20,7 +21,7 @@ class MateriPembelajaranController extends Controller
         //
         $title = "Materi Pembelajaran";
         $data  = MateriPembelajaran::get();
-        return view('admin.materi-pembelajaran.index',compact('title','data'));
+        return view('admin.materi-pembelajaran.index', compact('title', 'data'));
     }
 
     /**
@@ -32,7 +33,7 @@ class MateriPembelajaranController extends Controller
     {
         $title = "Form Materi Pembelajaran";
         $matkul = MataKuliah::get();
-        return view('admin.materi-pembelajaran.form',compact('title','matkul'));
+        return view('admin.materi-pembelajaran.form', compact('title', 'matkul'));
     }
 
     /**
@@ -60,7 +61,8 @@ class MateriPembelajaranController extends Controller
                         $filePath = $file[$i]->storeAs('uploads/' . time(), $fileName, 'public'); // Simpan file di direktori public/storage/uploads
                         File::create([
                             'materi_pembelajaran_id' => $materi->id,
-                            'nama_file' => $fileName
+                            'nama_file' => $fileName,
+                            'dir_file' => time()
                         ]);
                     }
                 }
@@ -73,7 +75,7 @@ class MateriPembelajaranController extends Controller
             }
         } catch (\Throwable $th) {
             //throw $th;
-            Alert::error('Informasi','Terjadi Kesalahan!');
+            Alert::error('Informasi', 'Terjadi Kesalahan!');
             return redirect('admin/materi-pembelajaran');
         }
     }
@@ -98,6 +100,11 @@ class MateriPembelajaranController extends Controller
     public function edit($id)
     {
         //
+        $data = MateriPembelajaran::findOrFail($id);
+        $title = "Form Edit Materi Pembelajaran";
+        $matkul = MataKuliah::get();
+        $file = File::where('materi_pembelajaran_id', $id)->get();
+        return view('admin.materi-pembelajaran.form_edit', compact('title', 'data', 'matkul', 'file'));
     }
 
     /**
@@ -109,7 +116,37 @@ class MateriPembelajaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $materi = MateriPembelajaran::findOrFail($id)->update([
+                'mata_kuliah_id' => $request->mata_kuliah,
+                'jenis_materi' => $request->jenis_materi,
+                'deskripsi' => $request->deskripsi,
+            ]);
+            if ($materi) {
+                if ($request->hasFile('file')) {
+                    $file = $request->file('file');
+                    for ($i = 0; $i < count($file); $i++) {
+                        $fileName = $file[$i]->getClientOriginalName();
+                        $filePath = $file[$i]->storeAs('uploads/' . time(), $fileName, 'public'); // Simpan file di direktori public/storage/uploads
+                        File::create([
+                            'materi_pembelajaran_id' => $id,
+                            'nama_file' => $fileName,
+                            'dir_file' => time()
+                        ]);
+                    }
+                }
+                if ($request->jenis_materi == 1) {
+                    return redirect('admin/kuis/' . $materi->id);
+                } else {
+                    Alert::success('Informasi', 'Update Data Berhasil');
+                    return redirect('admin/materi-pembelajaran');
+                }
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            Alert::error('Informasi', 'Terjadi Kesalahan!');
+            return redirect('admin/materi-pembelajaran');
+        }
     }
 
     /**
@@ -121,5 +158,32 @@ class MateriPembelajaranController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            $data = MateriPembelajaran::findOrFail($id)->delete();
+            Alert::success('Informasi', 'Hapus Data Berhasil');
+            return redirect('admin/materi-pembelajaran');
+        } catch (\Throwable $th) {
+            //throw $th;
+            Alert::error('Informasi', 'Terjadi Kesalahan!');
+            return redirect('admin/materi-pembelajaran');
+        }
+    }
+    public function pertemuanCheck($id)
+    {
+        $data = MateriPembelajaran::where('mata_kuliah_id', $id)->orderBy('pertemuan', 'DESC')->first();
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+    public function deleteFile($id)
+    {
+        try {
+            $data = File::findOrFail($id)->delete();
+            Alert::success('Informasi', 'Hapus Data Berhasil');
+            return redirect('admin/materi-pembelajaran/edit/' . $id);
+        } catch (\Throwable $th) {
+            Alert::error('Informasi', 'Terjadi Kesalahan!');
+            return redirect('admin/materi-pembelajaran/edit/' . $id);
+        }
     }
 }

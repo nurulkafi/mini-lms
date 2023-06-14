@@ -36,7 +36,7 @@
                                         <form method="POST" action="{{ url('admin/mahasiswa/hapus-data/' . $item->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{ url('admin/mahasiswa/edit-data/' . $item->id ) }}"
+                                            <a href="{{ url('admin/mahasiswa/edit-data/' . $item->id) }}"
                                                 class="btn btn-icon icon-left btn-primary"><i class="bi bi-pen"></i>
                                                 Edit</a>
                                             <button type="submit" class="btn btn-icon icon-left btn-danger show_confirm"
@@ -53,7 +53,7 @@
         </div>
     </section>
 
-<script type="text/javascript">
+    <script type="text/javascript">
         $('.show_confirm').click(function(event) {
             var form = $(this).closest("form");
             var name = $(this).data("name");
