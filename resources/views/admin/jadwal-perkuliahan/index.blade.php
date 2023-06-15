@@ -23,18 +23,36 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Bahasa Inggris</td>
-                                <td>Senen</td>
-                                <td>07.00 - 09.00</td>
-                                <td>
-                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                        data-bs-target="#formMataKuliahModal">Edit</button>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#ModalHapus">Hapus</button>
-                                </td>
-                            </tr>
+                            @php
+                                $no = 1;
+                            @endphp
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $item->matkul->nama_mata_kuliah }}</td>
+                                    <td>{{ $item->hari }}</td>
+                                    <td>{{ date('H:i', strtotime($item->jam_mulai)) }} - {{ date('H:i', strtotime($item->jam_selesai)) }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            @if ($item->jenis_materi == 1)
+                                                <a href="{{ url('admin/kuis/' . $item->id) }}" class="btn btn-info">Soal
+                                                    Kuis</a>
+                                            @endif
+                                            {{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#formMataKuliahModal">Edit</button> --}}
+                                            <a href="{{ url('admin/jadwal-perkuliahan/edit/' . $item->id) }}"
+                                                class="btn btn-warning">Edit</a>
+                                            <form method="POST"
+                                                action="{{ url('admin/jadwal-perkuliahan/hapus-data/' . $item->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger show_confirm"
+                                                    data-toggle="tooltip" title='Delete'>Hapus</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -72,23 +90,21 @@
             </div>
         </div>
     </div>
-    <!-- Modal Hapus-->
-    <div class="modal fade" id="ModalHapus" tabindex="-1" aria-labelledby="ModalHapusLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-danger ">
-                    <h5 class="modal-title text-white" id="ModalHapusLabel">Konfirmasi Hapus Data</h5>
-                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Apakah kamu yakin ingin menghapus data?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary">Ya</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda Yakin Akan Menghapus Data?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
+    </script>
 @endsection

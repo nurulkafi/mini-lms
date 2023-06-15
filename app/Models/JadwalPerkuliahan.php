@@ -20,4 +20,8 @@ class JadwalPerkuliahan extends Model
      * @var array
      */
     protected $guarded = [''];
+    public function matkul()
+    {
+        return $this->hasOne(MataKuliah::class, 'id', 'mata_kuliah_id');
+    }
 }

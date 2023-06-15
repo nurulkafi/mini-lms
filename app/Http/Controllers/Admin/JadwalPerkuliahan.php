@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JadwalPerkuliahan as ModelsJadwalPerkuliahan;
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
+use Alert;
 
 class JadwalPerkuliahan extends Controller
 {
@@ -28,7 +29,7 @@ class JadwalPerkuliahan extends Controller
      */
     public function create()
     {
-        $title = 'Jadwal Perkuliahan';
+        $title = 'Form Jadwal Perkuliahan';
         $matkul = MataKuliah::get();
         return view('admin.jadwal-perkuliahan.form',compact('title','matkul'));
     }
@@ -41,7 +42,19 @@ class JadwalPerkuliahan extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $saved = ModelsJadwalPerkuliahan::create([
+                'mata_kuliah_id' => $request->mata_kuliah,
+                'hari' => $request->hari_perkuliahan,
+                'jam_mulai' => $request->jam_mulai,
+                'jam_selesai' => $request->jam_selesai
+            ]);
+            Alert::success('Informasi', 'Tambah Data Berhasil');
+            return redirect('admin/jadwal-perkuliahan');
+        } catch (\Throwable $th) {
+            Alert::error('Informasi', 'Terjadi Kesalahan!');
+            return redirect('admin/jadwal-perkuliahan');
+        }
     }
 
     /**

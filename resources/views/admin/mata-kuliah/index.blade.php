@@ -30,21 +30,30 @@
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#ModalHapus">Hapus</button>
                                 </td> --}}
-                                @php
-                                    $no =1;
-                                @endphp
-                                @foreach ($data as $item)
+                            @php
+                                $no = 1;
+                            @endphp
+                            @foreach ($data as $item)
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $item->nama_mata_kuliah }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-warning btnEdit" data-bs-toggle="modal"
-                                            data-bs-target="#formMataKuliahModal" data-matkul="{{ $item->nama_mata_kuliah }}" data-id="{{ $item->id }}">Edit</button>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#ModalHapus">Hapus</button>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-warning btnEdit" data-bs-toggle="modal"
+                                                data-bs-target="#formMataKuliahModal"
+                                                data-matkul="{{ $item->nama_mata_kuliah }}"
+                                                data-id="{{ $item->id }}">Edit</button>
+                                            <form method="POST"
+                                                action="{{ url('admin/mata-kuliah/hapus-data/' . $item->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger show_confirm"
+                                                    data-toggle="tooltip" title='Delete'>Delete</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
-                                @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -75,41 +84,40 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
                 </form>
             </div>
         </div>
     </div>
-    <!-- Modal Hapus-->
-    <div class="modal fade" id="ModalHapus" tabindex="-1" aria-labelledby="ModalHapusLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-danger ">
-                    <h5 class="modal-title text-white" id="ModalHapusLabel">Konfirmasi Hapus Data</h5>
-                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Apakah kamu yakin ingin menghapus data?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary">Ya</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script>
-        $(".btnEdit").on('click',function(){
+        $(".btnEdit").on('click', function() {
             // alert();
             var id = $(this).attr("data-id");
             var matkul = $(this).attr("data-matkul");
             // alert(id);
             $('#nama_mata_kuliah').val(matkul);
-            $(".form-matkul").attr('action','../admin/mata-kuliah/proses-update-data/'+id);
+            $(".form-matkul").attr('action', '../admin/mata-kuliah/proses-update-data/' + id);
+        });
+    </script>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda Yakin Akan Menghapus Data?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
         });
     </script>
 @endsection

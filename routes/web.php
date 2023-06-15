@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\MataKuliahController;
 use App\Http\Controllers\Admin\MateriPembelajaranController;
 use App\Http\Controllers\FrontController;
+use App\Models\MataKuliah;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,7 @@ Route::get('admin/mata-kuliah', [MataKuliahController::class, 'index']);
 Route::get('admin/mata-kuliah/tambah-data', [MataKuliahController::class, 'create']);
 Route::post('admin/mata-kuliah/proses-tambah-data', [MataKuliahController::class, 'store']);
 Route::post('admin/mata-kuliah/proses-update-data/{id}', [MataKuliahController::class, 'update']);
+Route::delete('admin/mata-kuliah/hapus-data/{id}', [MataKuliahController::class, 'destroy']);
 
 //
 Route::get('admin/materi-pembelajaran', [MateriPembelajaranController::class, 'index']);
@@ -56,6 +58,9 @@ Route::get('admin/pertemuan/check/{id}', [MateriPembelajaranController::class, '
 
 Route::get('admin/jadwal-perkuliahan', [JadwalPerkuliahan::class, 'index']);
 Route::get('admin/jadwal-perkuliahan/tambah-data', [JadwalPerkuliahan::class, 'create']);
+Route::post('admin/jadwal-perkuliahan/proses-tambah-data', [JadwalPerkuliahan::class, 'store']);
+Route::post('admin/jadwal-perkuliahan/proses-update-data/{id}', [JadwalPerkuliahan::class, 'update']);
+Route::delete('admin/jadwal-perkuliahan/hapus-data/{id}', [JadwalPerkuliahan::class, 'destroy']);
 
 
 Route::get('admin/kuis/{id}', [KuisController::class, 'index']);

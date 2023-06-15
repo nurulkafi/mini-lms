@@ -37,11 +37,10 @@
                                             @csrf
                                             @method('DELETE')
                                             <a href="{{ url('admin/mahasiswa/edit-data/' . $item->id) }}"
-                                                class="btn btn-icon icon-left btn-primary"><i class="bi bi-pen"></i>
+                                                class="btn btn-icon icon-left btn-warning">
                                                 Edit</a>
                                             <button type="submit" class="btn btn-icon icon-left btn-danger show_confirm"
-                                                data-toggle="tooltip" title='Delete'><i
-                                                    class="bi bi-trash"></i>Delete</button>
+                                                data-toggle="tooltip" title='Delete'>Delete</button>
                                         </form>
                                     </td>
                                 </tr>

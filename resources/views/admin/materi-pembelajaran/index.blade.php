@@ -45,19 +45,23 @@
                                     <td>{{ $item->jenis_materi == 1 ? 'Kuis' : 'Materi' }}</td>
                                     <td>{{ $item->deskripsi }}</td>
                                     <td>
-                                        @if ($item->jenis_materi == 1)
-                                            <a href="{{ url('admin/kuis/' . $item->id) }}" class="btn btn-info">Soal
-                                                Kuis</a>
-                                        @endif
-                                        {{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                        <div class="btn-group">
+                                            @if ($item->jenis_materi == 1)
+                                                <a href="{{ url('admin/kuis/' . $item->id) }}" class="btn btn-info">Soal
+                                                    Kuis</a>
+                                            @endif
+                                            {{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#formMataKuliahModal">Edit</button> --}}
-                                        <a href="{{ url('admin/materi-pembelajaran/edit/' . $item->id) }}" class="btn btn-warning">Edit</a>
-                                        <form method="POST" action="{{ url('admin/materi-pembelajaran/hapus-data/' . $item->id) }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger show_confirm"
-                                                data-toggle="tooltip" title='Delete'>Hapus</button>
-                                        </form>
+                                            <a href="{{ url('admin/materi-pembelajaran/edit/' . $item->id) }}"
+                                                class="btn btn-warning">Edit</a>
+                                            <form method="POST"
+                                                action="{{ url('admin/materi-pembelajaran/hapus-data/' . $item->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger show_confirm"
+                                                    data-toggle="tooltip" title='Delete'>Hapus</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -116,7 +120,7 @@
             </div>
         </div>
     </div>
-        <script type="text/javascript">
+    <script type="text/javascript">
         $('.show_confirm').click(function(event) {
             var form = $(this).closest("form");
             var name = $(this).data("name");
@@ -130,7 +134,7 @@
                 if (result.isConfirmed) {
                     form.submit();
                 }
-            })
+            })Jad
         });
     </script>
 @endsection

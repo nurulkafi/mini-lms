@@ -10,14 +10,15 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-horizontal">
+                            <form class="form form-horizontal" method="post" action="{{ url('admin/jadwal-perkuliahan/proses-tambah-data') }}">
+                                @csrf
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label for="mata-kuliah">Mata Kuliah</label>
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <select name="mata-kuliah" id="mata-kuliah" class="form-select">
+                                            <select name="mata_kuliah" id="mata-kuliah" class="form-select">
                                                 {{-- <option value="">Bahasa Inggris</option>
                                                 <option value="">Bahasa Sunda</option> --}}
                                                 @foreach ($matkul as $item)
@@ -42,13 +43,18 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <label for="pertemuan">Jam Perkuliahan</label>
+                                            <label for="pertemuan">Jam Mulai</label>
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <select name="pertemuan" id="pertemuan" class="form-select">
-                                                <option value="">07.00 - 09.00</option>
-                                                <option value="">97.00 - 10.00</option>
-                                            </select>
+                                            <input type="time" name="jam_mulai" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="pertemuan">Jam Selesai</label>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <input type="time" name="jam_selesai" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-12 d-flex justify-content-end">

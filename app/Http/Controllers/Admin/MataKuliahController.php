@@ -107,5 +107,14 @@ class MataKuliahController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            $data = MataKuliah::findOrFail($id)->delete();
+            Alert::success('Informasi', 'Hapus Data Berhasil');
+            return redirect('admin/mata-kuliah');
+        } catch (\Throwable $th) {
+            //throw $th;
+            Alert::error('Informasi', 'Terjadi Kesalahan!');
+            return redirect('admin/mata-kuliah');
+        }
     }
 }
