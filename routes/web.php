@@ -58,6 +58,7 @@ Route::get('admin/pertemuan/check/{id}', [MateriPembelajaranController::class, '
 
 Route::get('admin/jadwal-perkuliahan', [JadwalPerkuliahan::class, 'index']);
 Route::get('admin/jadwal-perkuliahan/tambah-data', [JadwalPerkuliahan::class, 'create']);
+Route::get('admin/jadwal-perkuliahan/edit/{id}', [JadwalPerkuliahan::class, 'edit']);
 Route::post('admin/jadwal-perkuliahan/proses-tambah-data', [JadwalPerkuliahan::class, 'store']);
 Route::post('admin/jadwal-perkuliahan/proses-update-data/{id}', [JadwalPerkuliahan::class, 'update']);
 Route::delete('admin/jadwal-perkuliahan/hapus-data/{id}', [JadwalPerkuliahan::class, 'destroy']);
@@ -67,7 +68,7 @@ Route::get('admin/kuis/{id}', [KuisController::class, 'index']);
 Route::post('admin/kuis/proses-tambah-data/{id}', [KuisController::class, 'store']);
 
 Route::get('mata-kuliah', [FrontController::class, 'index']);
-Route::get('mata-kuliah/detail', [FrontController::class, 'detail']);
+Route::get('mata-kuliah/detail/{id}', [FrontController::class, 'detail']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

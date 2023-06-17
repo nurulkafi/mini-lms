@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JadwalPerkuliahan;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -14,9 +15,10 @@ class FrontController extends Controller
     public function index()
     {
         //
-        return view('front.layouts.mata-kuliah.index');
+        $data = JadwalPerkuliahan::get();
+        return view('front.layouts.mata-kuliah.index',compact('data'));
     }
-    public function detail()
+    public function detail($id)
     {
         //
         return view('front.layouts.mata-kuliah.detail');

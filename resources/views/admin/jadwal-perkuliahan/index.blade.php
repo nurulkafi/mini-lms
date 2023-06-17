@@ -19,6 +19,7 @@
                                 <th>Nama Mata Kuliah</th>
                                 <th>Hari</th>
                                 <th>Jam</th>
+                                <th>Ruangan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -32,6 +33,7 @@
                                     <td>{{ $item->matkul->nama_mata_kuliah }}</td>
                                     <td>{{ $item->hari }}</td>
                                     <td>{{ date('H:i', strtotime($item->jam_mulai)) }} - {{ date('H:i', strtotime($item->jam_selesai)) }}</td>
+                                    <td>{{ $item->ruangan }}</td>
                                     <td>
                                         <div class="btn-group">
                                             @if ($item->jenis_materi == 1)

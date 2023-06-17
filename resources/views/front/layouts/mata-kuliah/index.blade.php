@@ -1,30 +1,42 @@
 @extends('front.layouts.main')
 @section('content')
     <div class="row">
-        <div class="col-md-6">
-            <a href="{{ url('mata-kuliah/detail') }}" class="card-link">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Mata Kuliah 1</h5>
-                        <p class="card-text">Hari: Senin</p>
-                        <p class="card-text">Jam: 08:00 - 10:00</p>
-                        <p class="card-text">Ruangan: A101</p>
+        @foreach ($data as $item)
+            <div class="col-md-6">
+                <a href="{{ url('mata-kuliah/detail/'.$item->id) }}" class="card-link">
+                    <div class="card mb-3">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Mata Kuliah</h4>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h6>Hari</h6>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h6>: {{ $item->matkul->nama_mata_kuliah }}</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h6>Jam</h6>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h6>: {{ date('H:i', strtotime($item->jam_mulai)) }} - {{ date('H:i', strtotime($item->jam_selesai)) }}</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h6>Ruangan</h6>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h6>: {{ $item->ruangan }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-6">
-            <a href="{{ url('mata-kuliah/detail') }}" class="card-link">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Mata Kuliah 2</h5>
-                        <p class="card-text">Hari: Rabu</p>
-                        <p class="card-text card-info">Jam: 13:00 - 15:00</p>
-                        <p class="card-text card-info">Ruangan: B202</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Tambahkan card mata kuliah lainnya di sini -->
+                </a>
+            </div>
+        @endforeach
     </div>
 @endsection
