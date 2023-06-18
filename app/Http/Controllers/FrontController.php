@@ -69,6 +69,7 @@ class FrontController extends Controller
     public function submit_jawaban($id, request $request)
     {
         try {
+            $materi = MateriPembelajaran::findOrFail($id);
             $data = PertanyaanKuis::where('materi_pembelajaran_id', $id)->get();
 
             foreach ($data as $value) {
@@ -82,10 +83,10 @@ class FrontController extends Controller
                 ]);
             }
             Alert::success('Informasi', 'Jawaban sudah terkirim!');
-            return redirect('mata-kuliah/detail/' . $id);
+            return redirect('mata-kuliah/detail/' . $materi->mata_kuliah_id);
         } catch (\Throwable $th) {
             Alert::error('Informasi', 'Terjadi Kesalahan!');
-            return redirect('mata-kuliah/detail/' . $id);
+            return redirect('mata-kuliah/detail/' . $materi->mata_kuliah_id);
         }
     }
     public function absensi($id, request $request)
