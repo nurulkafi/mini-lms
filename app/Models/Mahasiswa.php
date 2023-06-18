@@ -20,4 +20,13 @@ class Mahasiswa extends Model
      * @var array
      */
     protected $guarded = [''];
+    public function jumlahPertemuan($id){
+        $data = MateriPembelajaran::where('mata_kuliah_id',$id)->get();
+        return count($data) ?? 0;
+    }
+    public function jumlahAbsensi($user_id,$id,$keterangan)
+    {
+        $data = Absensi::where('mata_kuliah_id', $id)->where('user_id',$user_id)->where('keterangan',$keterangan)->get();
+        return count($data) ?? 0;
+    }
 }

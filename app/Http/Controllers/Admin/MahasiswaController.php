@@ -45,14 +45,14 @@ class MahasiswaController extends Controller
     {
         $request->validate(
             [
-                'email' => ['required', 'string', 'email', 'max:255'],
+                // 'email' => ['required', 'string', 'email', 'max:255'],
                 'nama' => ['required'],
                 'tgl_lahir' => ['date', 'required'],
                 'nim' => ['required'],
                 'password' => ['required']
             ],
             [
-                'email.required' => 'Email wajib diisi!',
+                // 'email.required' => 'Email wajib diisi!',
                 'password.required' => 'Password wajib diisi!',
                 'tgl_lahir.required' => 'Tanggal Lahir wajib diisi!',
                 'nama.required' => 'Nama wajib diisi!',
@@ -63,7 +63,7 @@ class MahasiswaController extends Controller
         try {
             $user = User::create([
                 'name' => $request->nama,
-                'email' => $request->email,
+                'email' => $request->nim,
                 'password' => bcrypt($request->password)
             ]);
             if ($user) {
@@ -143,6 +143,7 @@ class MahasiswaController extends Controller
     {
         try {
             $data = Mahasiswa::findOrFail($id);
+            User::findOrFail($data->user_id)->delete();
             $data->delete();
             Alert::success('Informasi', 'Hapus Data Berhasil');
             return redirect('admin/mahasiswa');

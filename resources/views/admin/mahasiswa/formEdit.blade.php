@@ -14,7 +14,7 @@
                                 method="POST">
                                 @csrf
                                 <div class="form-body">
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-md-2">
                                             <label for="nim">NIM</label>
                                         </div>
@@ -22,7 +22,7 @@
                                             <input type="text" value="{{ $data->nim }}" data-parsley-required="true" id="nim" class="form-control" name="nim"
                                                 placeholder="NIM" />
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label for="nama">Nama</label>

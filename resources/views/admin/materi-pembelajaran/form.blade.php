@@ -119,13 +119,14 @@
                     }else{
                         var pertemuan = data.pertemuan;
                     }
-
+                    console.log(data);
                     // Mengambil elemen select dengan id "pertemuan"
                     var selectPertemuan = $('#pertemuan');
-
+                    selectPertemuan.empty();
+                    selectPertemuan.append('<option value="">PICK ONE</option>')
                     // Menambahkan option tambahan ke elemen select
                     for (var i = 1; i <= 16; i++) {
-                        if (i !== pertemuan) {
+                        if (i !== pertemuan && i > pertemuan) {
                             var option = $('<option></option>').attr('value', i).text('Pertemuan ke-' + i);
                             selectPertemuan.append(option);
                         }

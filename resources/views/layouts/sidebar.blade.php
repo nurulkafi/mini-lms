@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="index.html"><img src="{{ asset('assets/svg/logo.svg') }}" alt="Logo" srcset=""></a>
+                    <a href="{{ url('admin/mahasiswa') }}"><img src="{{ asset('assets/svg/logo.svg') }}" alt="Logo" srcset=""></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -46,6 +46,12 @@
                     <a href="{{ url('admin/mahasiswa') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Mahasiswa</span>
+                    </a>
+                </li>
+                <li class="sidebar-item @yield('rekap-absensi')">
+                    <a href="{{ url('admin/rekap-absensi') }}" class='sidebar-link'>
+                        <i class="bi bi-list-ul"></i>
+                        <span>Rekap Absensi</span>
                     </a>
                 </li>
                 <li class="sidebar-item @yield('mata-kuliah')">

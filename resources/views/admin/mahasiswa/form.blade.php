@@ -44,7 +44,7 @@
                                                 placeholder="Tanggal Lahir" />
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-md-2">
                                             <label for="email">Email</label>
                                         </div>
@@ -52,7 +52,7 @@
                                             <input type="email" data-parsley-required="true" id="email" class="form-control" name="email"
                                                 placeholder="Email" />
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label for="password">Password</label>

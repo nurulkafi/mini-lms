@@ -67,6 +67,7 @@ class MateriPembelajaranController extends Controller
                     }
                 }
                 if ($materi->jenis_materi == 1) {
+                    Alert::success('Informasi', 'Tambah Data Berhasil,Silahkan buat soal kuis!');
                     return redirect('admin/kuis/' . $materi->id);
                 } else {
                     Alert::success('Informasi', 'Tambah Data Berhasil');

@@ -24,7 +24,7 @@
                         @csrf
 
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input id="email" type="email"
+                            <input id="email" type="text"
                                 class="form-control @error('email') is-invalid @enderror" name="email"
                                 value="{{ old('email') }}" required autocomplete="email" autofocus>
                             <div class="form-control-icon">

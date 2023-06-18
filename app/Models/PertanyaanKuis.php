@@ -29,4 +29,5 @@ class PertanyaanKuis extends Model
         $data = JawabanKuis::where('pertanyaan_kuis_id', $id)->where('JawabanBenar',1)->first();
         return $data;
     }
+
 }

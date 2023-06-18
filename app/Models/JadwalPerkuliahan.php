@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class JadwalPerkuliahan extends Model
 {
@@ -24,4 +26,14 @@ class JadwalPerkuliahan extends Model
     {
         return $this->hasOne(MataKuliah::class, 'id', 'mata_kuliah_id');
     }
+    public function checkAbsensi($id)
+    {
+        $data = Absensi::where('mata_kuliah_id', $id)
+            ->where('user_id', Auth::user()->id)
+            ->whereDate('created_at', Carbon::today())
+            ->get();
+        $hitung = count($data) ?? 0;
+        return $hitung;
+    }
+
 }

@@ -2,7 +2,7 @@
     <div class="header-top">
         <div class="container">
             <div class="logo">
-                <a href="index.html"><img src="{{ asset('assets/image/logounjani.png') }}" alt="Logo" /></a>
+                <a href="{{ url('mata-kuliah') }}"><img src="{{ asset('assets/image/logounjani.png') }}" alt="Logo" /></a>
             </div>
             <div class="header-top-right">
                 <div class="dropdown">
@@ -20,8 +20,7 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
-                        <li><a class="dropdown-item" href="#">My Account</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="{{ url('settings') }}">Settings</a></li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>

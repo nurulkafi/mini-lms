@@ -7,13 +7,13 @@
                     <div class="card mb-3">
                         <div class="card-content">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Mata Kuliah</h4>
+                                <h4 class="card-title mb-4">{{ $item->matkul->nama_mata_kuliah }}</h4>
                                 <div class="row">
                                     <div class="col-md-2">
                                         <h6>Hari</h6>
                                     </div>
                                     <div class="col-md-9">
-                                        <h6>: {{ $item->matkul->nama_mata_kuliah }}</h6>
+                                        <h6>: {{ $item->hari }}</h6>
                                     </div>
                                 </div>
                                 <div class="row">
