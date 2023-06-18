@@ -35,7 +35,7 @@
                                     <td>{{ $item->jumlahAbsensi($item->user_id,$jadwal->mata_kuliah_id,'Hadir') }}</td>
                                     <td>{{ $item->jumlahAbsensi($item->user_id,$jadwal->mata_kuliah_id,'Izin') }}</td>
                                     <td>{{ $item->jumlahAbsensi($item->user_id,$jadwal->mata_kuliah_id,'Sakit') }}</td>
-                                    <td>{{ $item->jumlahAbsensi($item->user_id,$jadwal->mata_kuliah_id,'Hadir') }} / 7</td>
+                                    <td>{{ $item->jumlahAbsensi($item->user_id,$jadwal->mata_kuliah_id,'Hadir') }} /{{ $item->jumlahPertemuan($jadwal->mata_kuliah_id) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
