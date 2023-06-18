@@ -143,13 +143,15 @@ class MahasiswaController extends Controller
     {
         try {
             $data = Mahasiswa::findOrFail($id);
-            User::findOrFail($data->user_id)->delete();
+            $user_id = $data->user_id;
             $data->delete();
+            User::findOrFail($user_id)->delete();
             Alert::success('Informasi', 'Hapus Data Berhasil');
             return redirect('admin/mahasiswa');
         } catch (\Throwable $th) {
-            Alert::error('Informasi', 'Terjadi Kesalahan!');
-            return redirect('admin/mahasiswa');
+            // Alert::error('Informasi', 'Terjadi Kesalahan!');
+            // return redirect('admin/mahasiswa');
+            echo $th;
         }
     }
 }

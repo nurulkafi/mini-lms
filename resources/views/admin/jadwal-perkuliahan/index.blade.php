@@ -28,32 +28,35 @@
                                 $no = 1;
                             @endphp
                             @foreach ($data as $item)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $item->matkul->nama_mata_kuliah }}</td>
-                                    <td>{{ $item->hari }}</td>
-                                    <td>{{ date('H:i', strtotime($item->jam_mulai)) }} - {{ date('H:i', strtotime($item->jam_selesai)) }}</td>
-                                    <td>{{ $item->ruangan }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            @if ($item->jenis_materi == 1)
-                                                <a href="{{ url('admin/kuis/' . $item->id) }}" class="btn btn-info">Soal
-                                                    Kuis</a>
-                                            @endif
-                                            {{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                @if (!empty($item->matkul->nama_mata_kuliah))
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $item->matkul->nama_mata_kuliah }}</td>
+                                        <td>{{ $item->hari }}</td>
+                                        <td>{{ date('H:i', strtotime($item->jam_mulai)) }} -
+                                            {{ date('H:i', strtotime($item->jam_selesai)) }}</td>
+                                        <td>{{ $item->ruangan }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                @if ($item->jenis_materi == 1)
+                                                    <a href="{{ url('admin/kuis/' . $item->id) }}" class="btn btn-info">Soal
+                                                        Kuis</a>
+                                                @endif
+                                                {{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#formMataKuliahModal">Edit</button> --}}
-                                            <a href="{{ url('admin/jadwal-perkuliahan/edit/' . $item->id) }}"
-                                                class="btn btn-warning">Edit</a>
-                                            <form method="POST"
-                                                action="{{ url('admin/jadwal-perkuliahan/hapus-data/' . $item->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger show_confirm"
-                                                    data-toggle="tooltip" title='Delete'>Hapus</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
+                                                <a href="{{ url('admin/jadwal-perkuliahan/edit/' . $item->id) }}"
+                                                    class="btn btn-warning">Edit</a>
+                                                <form method="POST"
+                                                    action="{{ url('admin/jadwal-perkuliahan/hapus-data/' . $item->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger show_confirm"
+                                                        data-toggle="tooltip" title='Delete'>Hapus</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

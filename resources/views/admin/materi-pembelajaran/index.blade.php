@@ -38,32 +38,34 @@
                                 $no = 1;
                             @endphp
                             @foreach ($data as $item)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>Pertemuan ke-{{ $item->pertemuan }}</td>
-                                    <td>{{ $item->matkul->nama_mata_kuliah }}</td>
-                                    <td>{{ $item->jenis_materi == 1 ? 'Kuis' : 'Materi' }}</td>
-                                    <td>{{ $item->deskripsi }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            @if ($item->jenis_materi == 1)
-                                                <a href="{{ url('admin/kuis/' . $item->id) }}" class="btn btn-info">Soal
-                                                    Kuis</a>
-                                            @endif
-                                            {{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                @if (!empty($item->matkul->nama_mata_kuliah))
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>Pertemuan ke-{{ $item->pertemuan }}</td>
+                                        <td>{{ $item->matkul->nama_mata_kuliah }}</td>
+                                        <td>{{ $item->jenis_materi == 1 ? 'Kuis' : 'Materi' }}</td>
+                                        <td>{{ $item->deskripsi }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                @if ($item->jenis_materi == 1)
+                                                    <a href="{{ url('admin/kuis/' . $item->id) }}" class="btn btn-info">Soal
+                                                        Kuis</a>
+                                                @endif
+                                                {{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#formMataKuliahModal">Edit</button> --}}
-                                            <a href="{{ url('admin/materi-pembelajaran/edit/' . $item->id) }}"
-                                                class="btn btn-warning">Edit</a>
-                                            <form method="POST"
-                                                action="{{ url('admin/materi-pembelajaran/hapus-data/' . $item->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger show_confirm"
-                                                    data-toggle="tooltip" title='Delete'>Hapus</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
+                                                <a href="{{ url('admin/materi-pembelajaran/edit/' . $item->id) }}"
+                                                    class="btn btn-warning">Edit</a>
+                                                <form method="POST"
+                                                    action="{{ url('admin/materi-pembelajaran/hapus-data/' . $item->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger show_confirm"
+                                                        data-toggle="tooltip" title='Delete'>Hapus</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -134,7 +136,7 @@
                 if (result.isConfirmed) {
                     form.submit();
                 }
-            })Jad
+            }) Jad
         });
     </script>
 @endsection

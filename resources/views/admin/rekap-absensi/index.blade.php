@@ -24,19 +24,22 @@
                                 $no = 1;
                             @endphp
                             @foreach ($data as $item)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $item->matkul->nama_mata_kuliah }}</td>
-                                    <td>{{ $item->hari }}</td>
-                                    <td>{{ date('H:i', strtotime($item->jam_mulai)) }} - {{ date('H:i', strtotime($item->jam_selesai)) }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="{{ url('admin/rekap-absensi/' . $item->id) }}"
-                                                class="btn btn-info">Detail</a>
+                                @if (!empty($item->matkul->nama_mata_kuliah))
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $item->matkul->nama_mata_kuliah }}</td>
+                                        <td>{{ $item->hari }}</td>
+                                        <td>{{ date('H:i', strtotime($item->jam_mulai)) }} -
+                                            {{ date('H:i', strtotime($item->jam_selesai)) }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="{{ url('admin/rekap-absensi/' . $item->id) }}"
+                                                    class="btn btn-info">Detail</a>
 
-                                        </div>
-                                    </td>
-                                </tr>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
