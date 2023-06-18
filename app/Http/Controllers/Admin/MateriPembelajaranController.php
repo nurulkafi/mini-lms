@@ -137,14 +137,14 @@ class MateriPembelajaranController extends Controller
                     }
                 }
                 if ($request->jenis_materi == 1) {
-                    return redirect('admin/kuis/' . $materi->id);
+                    return redirect('admin/kuis/' . $id);
                 } else {
                     Alert::success('Informasi', 'Update Data Berhasil');
                     return redirect('admin/materi-pembelajaran');
                 }
             }
         } catch (\Throwable $th) {
-            //throw $th;
+            // throw $th;
             Alert::error('Informasi', 'Terjadi Kesalahan!');
             return redirect('admin/materi-pembelajaran');
         }
@@ -179,12 +179,15 @@ class MateriPembelajaranController extends Controller
     public function deleteFile($id)
     {
         try {
-            $data = File::findOrFail($id)->delete();
+            $data = File::findOrFail($id);
+            $ids = $data->materi_pembelajaran_id;
+
+            $data->delete();
             Alert::success('Informasi', 'Hapus Data Berhasil');
-            return redirect('admin/materi-pembelajaran/edit/' . $id);
+            return redirect('admin/materi-pembelajaran/edit/' . $ids);
         } catch (\Throwable $th) {
             Alert::error('Informasi', 'Terjadi Kesalahan!');
-            return redirect('admin/materi-pembelajaran/edit/' . $id);
+            return redirect('admin/materi-pembelajaran/edit/' . $ids);
         }
     }
 }
